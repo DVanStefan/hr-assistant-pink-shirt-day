@@ -11,12 +11,39 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <img src="images/dv-logo.png" alt="Destination Vancouver" class="logo">
-            <p class="subtitle">Pink Shirt Day 2026</p>
-        </header>
+        <div class="left-column">
+            <header>
+                <img src="images/dv-logo.png" alt="Destination Vancouver" class="logo">
+                <h1>Freedom from Bullying, Harassment & Violence</h1>
+                <p class="subtitle">Pink Shirt Day 2026</p>
+            </header>
 
-        <div class="otto-stage">
+            <div class="controls" id="controls" style="display:none;">
+                <button id="mic-button" class="mic-button" disabled>
+                    <svg id="mic-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                    <svg id="mic-off-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" style="display:none;">
+                        <path d="M19 11h-1.7c0 .74-.16 1.43-.43 2.05l1.23 1.23c.56-.98.9-2.09.9-3.28zm-4.02.17c0-.06.02-.11.02-.17V5c0-1.66-1.34-3-3-3S9 3.34 9 5v.18l5.98 5.99zM4.27 3L3 4.27l6.01 6.01V11c0 1.66 1.34 3 3 3 .23 0 .44-.03.65-.08l1.66 1.66c-.71.33-1.5.52-2.31.52-2.76 0-5.3-2.1-5.3-4.86H5.3c0 3.41 2.72 6.23 6.2 6.72V21h1v-3.03c.86-.12 1.67-.39 2.41-.78l3.83 3.81 1.27-1.27L4.27 3z"/>
+                    </svg>
+                </button>
+                <span id="mic-status">Tap to talk to Otto</span>
+            </div>
+
+            <div class="transcript" id="transcript" style="display:none;">
+                <div id="transcript-messages"></div>
+            </div>
+
+            <div class="text-fallback" id="text-fallback" style="display:none;">
+                <form id="chat-form">
+                    <input type="text" id="user-input" placeholder="Or type a question..." autocomplete="off">
+                    <button type="submit" id="send-button">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="right-column">
             <div id="avatar-container">
                 <video id="otto-video" autoplay playsinline></video>
                 <img id="avatar-image" src="images/otter-avatar.png" alt="Otto the Otter">
@@ -26,35 +53,6 @@
                 </button>
             </div>
             <div id="avatar-status"></div>
-        </div>
-
-        <div class="controls" id="controls" style="display:none;">
-            <button id="mic-button" class="mic-button" disabled>
-                <svg id="mic-icon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
-                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                </svg>
-                <svg id="mic-off-icon" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="display:none;">
-                    <path d="M19 11h-1.7c0 .74-.16 1.43-.43 2.05l1.23 1.23c.56-.98.9-2.09.9-3.28zm-4.02.17c0-.06.02-.11.02-.17V5c0-1.66-1.34-3-3-3S9 3.34 9 5v.18l5.98 5.99zM4.27 3L3 4.27l6.01 6.01V11c0 1.66 1.34 3 3 3 .23 0 .44-.03.65-.08l1.66 1.66c-.71.33-1.5.52-2.31.52-2.76 0-5.3-2.1-5.3-4.86H5.3c0 3.41 2.72 6.23 6.2 6.72V21h1v-3.03c.86-.12 1.67-.39 2.41-.78l3.83 3.81 1.27-1.27L4.27 3z"/>
-                </svg>
-            </button>
-            <span id="mic-status">Tap to talk to Otto</span>
-        </div>
-
-        <div class="transcript" id="transcript" style="display:none;">
-            <div id="transcript-messages"></div>
-        </div>
-
-        <div class="text-fallback" id="text-fallback" style="display:none;">
-            <form id="chat-form">
-                <input
-                    type="text"
-                    id="user-input"
-                    placeholder="Or type a question..."
-                    autocomplete="off"
-                >
-                <button type="submit" id="send-button">Send</button>
-            </form>
         </div>
     </div>
 

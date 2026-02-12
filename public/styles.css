@@ -36,134 +36,63 @@
 body {
     font-family: var(--font-body);
     background: linear-gradient(135deg, var(--background) 0%, var(--white) 100%);
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     color: var(--text-dark);
 }
 
+/* Two-column layout */
 .container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 16px;
-    min-height: 100vh;
+    padding: 16px 24px;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    gap: 24px;
 }
 
-header {
-    padding: 8px 0 4px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    align-self: flex-start;
-}
-
-header .logo {
-    height: 36px;
-    width: auto;
-}
-
-header .subtitle {
-    font-family: var(--font-heading);
-    color: var(--primary);
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-/* Otto — single video, no transitions */
-.otto-stage {
+/* Left column — header, controls, transcript, text input */
+.left-column {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 480px;
-    padding: 4px 0;
+    min-width: 0;
 }
 
-#avatar-container {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    max-height: 55vh;
-    overflow: hidden;
-    border-radius: 20px;
-    position: relative;
-    background: var(--white);
+header {
+    padding: 8px 0 16px;
 }
 
-#otto-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 20px;
-    display: none;
+header .logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 12px;
 }
 
-#avatar-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 20px;
-    display: block;
-}
-
-/* Start conversation button — overlaid on Otto */
-.start-button {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 28px;
-    background: var(--primary);
-    color: var(--white);
-    border: none;
-    border-radius: 30px;
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(4, 52, 29, 0.35);
-    transition: all 0.2s;
-    z-index: 2;
-}
-
-.start-button:hover {
-    background: var(--primary-light);
-    transform: translateX(-50%) scale(1.05);
-}
-
-.start-icon {
-    font-size: 1.3rem;
-}
-
-#avatar-status {
-    margin-top: 8px;
-    padding: 6px 14px;
-    background: var(--meadow);
-    border-radius: 20px;
-    font-size: 0.85rem;
+header h1 {
+    font-family: var(--font-heading);
     color: var(--primary);
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
-/* Mic button */
+header .subtitle {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Mic controls */
 .controls {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 6px;
-    padding: 8px 0;
+    gap: 12px;
+    padding: 12px 0;
 }
 
 .mic-button {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     border: none;
     background: var(--primary);
@@ -174,6 +103,7 @@ header .subtitle {
     justify-content: center;
     transition: all 0.2s;
     box-shadow: var(--shadow);
+    flex-shrink: 0;
 }
 
 .mic-button:hover:not(:disabled) {
@@ -197,56 +127,54 @@ header .subtitle {
 }
 
 #mic-status {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-light);
 }
 
 /* Transcript */
 .transcript {
-    width: 100%;
-    max-height: 120px;
+    flex: 1;
     overflow-y: auto;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 12px;
-    margin-top: 4px;
+    padding: 12px 16px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    min-height: 0;
 }
 
 #transcript-messages {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
 }
 
 #transcript-messages .msg {
-    font-size: 0.85rem;
-    line-height: 1.4;
-    padding: 4px 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 8px 12px;
+    border-radius: 12px;
 }
 
 #transcript-messages .msg.user {
-    color: var(--primary);
-    font-weight: 600;
-}
-
-#transcript-messages .msg.user::before {
-    content: 'You: ';
+    background: var(--primary);
+    color: var(--white);
+    align-self: flex-end;
+    max-width: 85%;
+    border-bottom-right-radius: 4px;
 }
 
 #transcript-messages .msg.assistant {
-    color: var(--text-light);
+    background: var(--background);
+    color: var(--text-dark);
+    align-self: flex-start;
+    max-width: 85%;
+    border-bottom-left-radius: 4px;
 }
 
-#transcript-messages .msg.assistant::before {
-    content: 'Otto: ';
-    font-weight: 600;
-    color: var(--primary-light);
-}
-
-/* Text fallback */
+/* Text input */
 .text-fallback {
-    width: 100%;
-    padding: 4px 0 8px;
+    padding: 12px 0 4px;
+    flex-shrink: 0;
 }
 
 #chat-form {
@@ -290,12 +218,101 @@ header .subtitle {
     cursor: not-allowed;
 }
 
-@media (max-width: 500px) {
-    #avatar-container {
-        max-height: 50vh;
+/* Right column — Otto, as big as possible */
+.right-column {
+    width: 50%;
+    max-width: 500px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#avatar-container {
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    background: var(--white);
+}
+
+#otto-video,
+#avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 20px;
+}
+
+#otto-video {
+    display: none;
+}
+
+#avatar-image {
+    display: block;
+}
+
+/* Start button on Otto */
+.start-button {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(4, 52, 29, 0.35);
+    transition: all 0.2s;
+    z-index: 2;
+}
+
+.start-button:hover {
+    background: var(--primary-light);
+    transform: translateX(-50%) scale(1.05);
+}
+
+.start-icon {
+    font-size: 1.3rem;
+}
+
+#avatar-status {
+    margin-top: 8px;
+    padding: 6px 14px;
+    background: var(--meadow);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+/* Mobile — stack vertically */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 12px 16px;
+    }
+
+    .right-column {
+        width: 100%;
+        max-width: 360px;
+        align-self: center;
+        order: -1;
+        max-height: 45vh;
     }
 
     .transcript {
-        max-height: 100px;
+        max-height: 200px;
     }
 }
